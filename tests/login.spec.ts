@@ -20,7 +20,11 @@ test.describe ('Login Tests', () => {
     //const { baseURL, userName, password } = new testData();
 
     test('should navigate to login page with correct URL', async ({ page }) => {
+        
+        // Navigate to the login page
         await loginPage.login(loginPage.baseURL, loginPage.userName, loginPage.password);
+       
+       //Navigate to Staff Pool and search for staff member
         await staffPoolPage.navigateToStaffPool();
         const staffNameLocator = await staffPoolPage.searchStaffByName();
         const staffName = await staffNameLocator.textContent();
@@ -30,6 +34,7 @@ test.describe ('Login Tests', () => {
             console.log("Staff member not found");
         }
 
+        //Logout after staff search       
         await logoutPage.Logout();
     });
 });
