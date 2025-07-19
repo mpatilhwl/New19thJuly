@@ -1,6 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { testData } from '../testData';
-//import { LoginPage } from './LoginPage';
 
 export class LogoutPage {
     readonly page: Page;
@@ -14,11 +13,10 @@ export class LogoutPage {
     }
 
     async Logoutflow() {    
-        //await this.page.waitForTimeout(5000);
         await this.profile.click();
         await this.page.waitForTimeout(2000);
         await this.logoutButton.click();
-        await this.page.waitForTimeout(5000);
+        await this.page.waitForTimeout(2000);
     }
 
     async Logout(){
