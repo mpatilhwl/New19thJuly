@@ -3,16 +3,19 @@ import { LoginPage } from '../pages/LoginPage';
 import { testData } from '../testData';
 import { LogoutPage } from '../pages/LogoutPage';
 import { StaffPoolPage } from '../pages/StaffPoolPage';
+import { SelectProgType } from '../pages/SelectProgTypePage';
 
 test.describe ('Login Tests', () => {
     let loginPage: LoginPage;
     let logoutPage: LogoutPage;
     let staffPoolPage: StaffPoolPage;
+    let selectProgType: SelectProgType;
 
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
         logoutPage = new LogoutPage(page);
         staffPoolPage = new StaffPoolPage(page);
+        selectProgType = new SelectProgType(page);
         loginPage.baseURL;
         loginPage.userName;
         loginPage.password;
@@ -24,6 +27,9 @@ test.describe ('Login Tests', () => {
         // Navigate to the login page
         await loginPage.login(loginPage.baseURL, loginPage.userName, loginPage.password);
        
+        //Select Program Type
+       await selectProgType.selectProgramType();
+
        //Navigate to Staff Pool and search for staff member
         await staffPoolPage.navigateToStaffPool();
         const staffNameLocator = await staffPoolPage.searchStaffByName();
