@@ -22,8 +22,9 @@ test.describe ('Login Tests', () => {
     });
     //const { baseURL, userName, password } = new testData();
 
-    test('should navigate to login page with correct URL', async ({ page }) => {
-        
+    // @sanity
+    test('@sanity should navigate to login page with correct URL', async ({ page }) => {
+
         // Navigate to the login page
         await loginPage.login(loginPage.baseURL, loginPage.userName, loginPage.password);
        
