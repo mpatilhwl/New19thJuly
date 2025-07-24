@@ -22,7 +22,17 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [
+  reporter: process.env.CI ? [
+    ['allure-playwright', {
+      outputFolder: 'allure-results',
+      suiteTitle: 'Test Results',
+      detail: true,
+      screenshot: true,
+      video: false,
+      trace: false
+    }],
+    ['junit', { outputFile: 'test-results/junit.xml' }]
+  ] : [
     ['html'],
     ['allure-playwright', { 
       outputFolder: 'allure-results',
@@ -40,6 +50,12 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    
+    /* Capture screenshot on failure */
+    screenshot: 'only-on-failure',
+    
+    /* Record video on failure */
+    video: process.env.CI ? 'retain-on-failure' : 'on-first-retry',
   },
 
   /* Configure projects for major browsers */
