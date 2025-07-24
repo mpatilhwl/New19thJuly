@@ -8,10 +8,13 @@
     "test:debug": "npx playwright test --debug",
     "test:ui": "npx playwright test --ui",
     "allure:generate": "npx allure generate allure-results --clean -o allure-report",
+    "allure:generate:safe": "node -e \"try { require('child_process').execSync('npx allure generate allure-results --clean -o allure-report', {stdio: 'inherit'}); } catch(e) { console.log('Allure generation failed, but continuing...'); }\"",
     "allure:open": "npx allure open allure-report",
     "allure:serve": "npx allure serve allure-results",
-    "test:allure": "npm run test && npm run allure:generate && npm run allure:open",
-    "clean": "rmdir /s /q allure-results allure-report 2>nul || true"
+    "allure:script": "scripts/generate-allure-report.bat",
+    "test:allure": "npm run test && npm run allure:generate:safe",
+    "test:ci": "npm run test && npm run allure:generate:safe",
+    "clean": "rmdir /s /q allure-results allure-report test-results 2>nul || true"
   },
   "keywords": [],
   "author": "",
